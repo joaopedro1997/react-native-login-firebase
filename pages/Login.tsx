@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import firebase from "../firebaseConfig";
 import {
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -27,7 +29,8 @@ export function Login() {
   }
 
   function changeWelcome(dataUser: any) {
-    navigation.navigate("Welcome", { dataUser });
+
+    navigation.navigate("Welcome", { email:dataUser.email,uid:dataUser.uid });
   }
 
   function handleSubmit() {
@@ -37,6 +40,7 @@ export function Login() {
       .then((userCredential) => {
         // Signed in
         const user: any = userCredential.user;
+
         changeWelcome(user);
         // navigation.navigate("Welcome");
       })
@@ -53,11 +57,16 @@ export function Login() {
       if (user) {
         changeWelcome(user);
       } else {
+        console.log("usuário não logado login")
       }
     });
   }, []);
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View>
@@ -65,6 +74,7 @@ export function Login() {
             <TextInput
               placeholder="digite seu email"
               keyboardType="email-address"
+              autoCorrect={false}
               style={styles.input}
               onChangeText={handleInputChangeEmail}
             />
@@ -81,6 +91,7 @@ export function Login() {
         </View>
       </TouchableWithoutFeedback>
       <StatusBar style="auto" />
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

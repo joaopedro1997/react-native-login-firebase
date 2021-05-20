@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/core";
 import { color } from "react-native-reanimated";
 
 export function Welcome({ route }: any) {
-  const { dataUser } = route.params ?? {};
+  const { email,uid } = route.params ?? {};
   const navigation = useNavigation();
 
   function handleLogout() {
@@ -36,9 +36,8 @@ export function Welcome({ route }: any) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log("usuario logado com sucesso");
-        console.log(user);
       } else {
-        console.log("usuário não logado");
+        console.log("usuário não logado welcome");
       }
     });
   }, []);
@@ -46,14 +45,14 @@ export function Welcome({ route }: any) {
     // <Welcome />
     <>
       <Appbar.Header style={{ backgroundColor: "#1A73E8" }}>
-        <Appbar.Content title={dataUser?.email} />
+        <Appbar.Content title={email} />
       </Appbar.Header>
       <SafeAreaView style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>
             <View>
               <Text style={styles.header}>Você está logado!</Text>
-              <Text>{dataUser?.email}</Text>
+              <Text>{email}</Text>
             </View>
             <TouchableOpacity onPress={handleLogout} style={styles.loginButton}>
               <Text style={styles.textButton}>Logout</Text>
