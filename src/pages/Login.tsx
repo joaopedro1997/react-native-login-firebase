@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import firebase from "../firebaseConfig";
+import firebase from "../../firebaseConfig";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,9 +16,11 @@ import {
 import { useNavigation } from "@react-navigation/core";
 
 export function Login() {
+  
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   function handleInputChangeEmail(value: string) {
     setEmail(value);

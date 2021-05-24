@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Appbar } from "react-native-paper";
 import React, { useEffect, useState } from "react";
-import firebase from "../firebaseConfig";
+import firebase from "../../firebaseConfig";
 import {
   Keyboard,
   SafeAreaView,
@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/core";
 import { color } from "react-native-reanimated";
 
 export function Welcome({ route }: any) {
-  const { email,uid } = route.params ?? {};
+  const { email, uid } = route.params ?? {};
   const navigation = useNavigation();
 
   function handleLogout() {
